@@ -17,7 +17,7 @@ def convert_csv_to_json(file_csv_path):
     if Path(file_csv_path).exists():
         file_csv_path = Path(file_csv_path)
         if file_csv_path.suffix == ".csv":
-            pd.read_csv(file_csv_path).to_json(Path(file_csv_path.name + ".json"))
+            pd.read_csv(file_csv_path).to_json(Path(file_csv_path.stem + ".json"))
         else:
             print("file is not csv")
     else:
