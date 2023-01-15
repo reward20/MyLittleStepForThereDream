@@ -1,48 +1,37 @@
+"""
+Нпишите программу, осуществляющую провeрку логина и пароля
+для входа в систему. Проверка введенных пользователем данных
+должна осуществляться в отдельной функции, принимающей 
+следующие параметры: имя пользователя, пароль, количество попыток
+входа в систему (по умолчанию 3), сообщение выводимое 
+пользователю в случае, если все попытки входа в систему исчерпаны
+(по умолчанию: "Система заблокирована. Повторите попытку позже"
+"""
+count = 1
 
 
-
-def task_1_fibonachi(border:int):
-    """
-    Написать функцию, которая
-    выводит ряд Фибоначчи
-    по заданной границe N.
-    """
-    a = 0
-    b = 1
-    for i in range(border):
-        print (a)
-        c = a
-        a = b + a
-        b = c
-
-def task_2(*args: list):
-    from itertools import compress
-    """
-    Дана последовательность целых чисел.
-    Найти минимальное среди простых чисел
-    и максимальное среди чисел не
-    являющихся простыми
-    """
-    lst_true = list(map(brute_force_of_divisors,args))
-    ls_prime = list(compress(args,lst_true))
-    ls_composite = list(compress(args,[not i for i in lst_true]))
-    print ("Минимальное среди прсстых " + str(min(ls_prime)),"\n","Максимальное среди составных "+str(max(ls_composite)))
-
-
-def brute_force_of_divisors(N:int) -> bool:
-    j = 0
-    i = 2
-    while i*i <= N and j != 1:
-        if N % i == 0:
-            j = 1
-        i = i + 1
-    else:
-        if j == 1:
-            return False
+def account_verification(input_login, input_password, count_of_attemps=3,
+                         failure_message="Система заблокирована. Повторите попытку через 5 минут"):
+    log_admin = "admin"
+    pass_admin = "admin"
+    global count
+    if count < count_of_attemps:
+        if input_login == log_admin and input_password == pass_admin:
+            print("hello admin")
         else:
-            return True
+            count += 1
+            print("input data not correct")
+    else:
+        print(failure_message)
 
 
+def log_in_system():
+    login = input("Enter your username: ")
+    password = input("Enter your password: ")
+    return [login,password]
 if __name__ == '__main__':
-    task_1_fibonachi(15)
-    task_2(1,2,3,4,5,6,7,8,9)
+    account_verification(*log_in_system())
+    account_verification(*log_in_system())
+    account_verification(*log_in_system())
+
+
